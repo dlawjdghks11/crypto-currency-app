@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getCoins } from "../api";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { BASE_URI } from "./Router";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -42,7 +41,7 @@ const Coins = () => {
       {isLoading ? "Loading.." : 
       data?.map(coin => 
       <Coin key={coin.id}>
-        <Link to={`${BASE_URI}/${coin.id}`}>{coin.name} &rarr;</Link>
+        <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
       </Coin>)}
     </CoinsList>
   </Container>
