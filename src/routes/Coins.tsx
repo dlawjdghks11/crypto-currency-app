@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCoins } from "../api";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -10,7 +10,16 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 30px;
+`;
+
+const Title = styled.h1`
+  font-size: 36px;
+  color: ${(props) => props.theme.text};
 `;
 
 const CoinsList = styled.ul`
@@ -18,11 +27,19 @@ const CoinsList = styled.ul`
 `;
 
 const Coin = styled.li`
-
-`;
-
-const Title = styled.h1`
-  
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 5px;
+  color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.background};
+  &:hover {
+    background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.background};
+    cursor: pointer;
+  }
 `;
 
 interface CoinInterface {
@@ -32,6 +49,7 @@ interface CoinInterface {
 
 const Coins = () => {
   const { isLoading, data } = useQuery<CoinInterface[]>({ queryKey: ["allCoins"], queryFn: getCoins})
+  const navigate = useNavigate();
 
   return <Container>
     <Header>
@@ -40,8 +58,8 @@ const Coins = () => {
     <CoinsList>
       {isLoading ? "Loading.." : 
       data?.map(coin => 
-      <Coin key={coin.id}>
-        <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+      <Coin key={coin.id} onClick={() => navigate(`/${coin.id}`)}>
+        {coin.name} &rarr;
       </Coin>)}
     </CoinsList>
   </Container>
