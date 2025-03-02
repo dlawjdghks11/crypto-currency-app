@@ -3,6 +3,7 @@ import Coins from "./Coins";
 import Coin from "./Coin";
 import Chart from "./Chart";
 import Price from "./Price";
+import Header from "./Header";
 
 export const Router = () => {
   return (
@@ -13,6 +14,7 @@ export const Router = () => {
       }} 
       basename="/react-masterclass"
     >
+      <Header />
       <Routes>
         <Route path="/" element={<Coins />} />
         <Route path="/:coinId" element={<Coin />}>

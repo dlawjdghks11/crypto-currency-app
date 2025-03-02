@@ -14,7 +14,6 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-top: 30px;
 `;
 
 const Title = styled.h1`
@@ -53,7 +52,7 @@ const Coins = () => {
 
   return <Container>
     <Header>
-      <Title>Coins</Title>
+      <Title>COINS</Title>
     </Header>
     <CoinsList>
       {isLoading ? "Loading.." : 

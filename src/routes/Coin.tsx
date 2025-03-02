@@ -15,7 +15,6 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-top: 30px;
 `;
 
 const Title = styled.h1`
@@ -61,9 +60,10 @@ const Tab = styled.div`
 `;
 
 const TabItem = styled.div<{
-  isActive: boolean;
+  $isActive: boolean;
 }>`
-  color: ${(props) => props.isActive ? props.theme.primary : props.theme.text};
+  color: ${(props) => props.$isActive ? props.theme.primary : props.theme.text};
+  cursor: pointer;
 `;
 
 interface InfoData {
@@ -138,7 +138,7 @@ const Coin = () => {
           </OverviewItem>
         </Overview>
         <Description>{infoData?.description}</Description>
-        <Overview>
+        <Overview style={{ padding: "5px 60px"}}>
           <OverviewItem>
             <Text>TOTAL SUPPLY</Text>
             <Text>{tickersData?.total_supply}</Text>
@@ -151,11 +151,11 @@ const Coin = () => {
         <Tab>
           <TabItem 
             onClick={() => onClickTabMenu("chart")}
-            isActive={tabName === "chart"}
+            $isActive={tabName === "chart"}
           >Chart</TabItem>
           <TabItem 
             onClick={() => onClickTabMenu("price")}
-            isActive={tabName === "price"}
+            $isActive={tabName === "price"}
           >Price</TabItem>
         </Tab>
         <Outlet />
