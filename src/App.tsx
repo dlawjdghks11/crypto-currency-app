@@ -1,6 +1,6 @@
-import React from 'react';
-import { Router } from './routes/Router';
-import { createGlobalStyle } from 'styled-components';
+import React from "react";
+import { Router } from "./routes/Router";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -57,13 +57,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-`
+`;
 
 function App() {
-  return <>
-    <GlobalStyle />
-    <Router />
-  </>
+  return (
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
+  );
 }
 
 export default App;

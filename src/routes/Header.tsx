@@ -9,14 +9,22 @@ const Container = styled.header`
 
 const Home = styled.nav`
   cursor: pointer;
-  color: ${(props) => props.theme.text}
+  color: ${(props) => props.theme.text};
 `;
 
 const Header = () => {
   const navigate = useNavigate();
-  return <Container>
-    <Home onClick={() => { navigate("/")}}>Home</Home>
-  </Container>
-}
+  return (
+    <Container>
+      <Home
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Home
+      </Home>
+    </Container>
+  );
+};
 
 export default Header;

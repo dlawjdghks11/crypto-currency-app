@@ -5,5 +5,5 @@ export const theme: DefaultTheme = {
   surface: "#222831",
   text: "#E0E0E0",
   primary: "#03DAC6",
-  border: "#444444"
-}
+  border: "#444444",
+};

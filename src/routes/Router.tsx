@@ -7,11 +7,11 @@ import Header from "./Header";
 
 export const Router = () => {
   return (
-    <BrowserRouter 
-      future={{ 
+    <BrowserRouter
+      future={{
         v7_startTransition: true,
-        v7_relativeSplatPath: true
-      }} 
+        v7_relativeSplatPath: true,
+      }}
       basename="/crypto-currency-app"
     >
       <Header />
@@ -23,5 +23,5 @@ export const Router = () => {
         </Route>
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};

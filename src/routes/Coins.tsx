@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCoins } from "../api";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { CoinInterface } from "../types/api";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -21,9 +22,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.text};
 `;
 
-const CoinsList = styled.ul`
-  
-`;
+const CoinsList = styled.ul``;
 
 const Coin = styled.li`
   display: flex;
@@ -41,27 +40,34 @@ const Coin = styled.li`
   }
 `;
 
-interface CoinInterface {
-  id: string;
-  name: string;
-}
-
 const Coins = () => {
-  const { isLoading, data } = useQuery<CoinInterface[]>({ queryKey: ["allCoins"], queryFn: getCoins})
+  const { isLoading, data } = useQuery<CoinInterface[]>({
+    queryKey: ["allCoins"],
+    queryFn: getCoins,
+  });
   const navigate = useNavigate();
 
-  return <Container>
-    <Header>
-      <Title>COINS</Title>
-    </Header>
-    <CoinsList>
-      {isLoading ? "Loading.." : 
-      data?.map(coin => 
-      <Coin key={coin.id} onClick={() => navigate(`/${coin.id}`)}>
-        {coin.name} &rarr;
-      </Coin>)}
-    </CoinsList>
-  </Container>
-}
+  return (
+    <Container>
+      <Header>
+        <Title>COINS</Title>
+      </Header>
+      <CoinsList>
+        {isLoading
+          ? "Loading.."
+          : data?.map((coin) => (
+              <Coin
+                key={coin.id}
+                onClick={() => {
+                  navigate(`/${coin.id}`);
+                }}
+              >
+                {coin.name} &rarr;
+              </Coin>
+            ))}
+      </CoinsList>
+    </Container>
+  );
+};
 
 export default Coins;

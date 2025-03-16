@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getInfoData, getPriceData } from "../api";
+import { InfoData, PriceData } from "../types/api";
 import { useState } from "react";
 
 const Container = styled.div`
@@ -62,107 +63,88 @@ const Tab = styled.div`
 const TabItem = styled.div<{
   $isActive: boolean;
 }>`
-  color: ${(props) => props.$isActive ? props.theme.primary : props.theme.text};
+  color: ${(props) =>
+    props.$isActive ? props.theme.primary : props.theme.text};
   cursor: pointer;
 `;
-
-interface InfoData {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-  logo: string;
-  description: string;
-  message: string;
-  open_source: boolean;
-  started_at: string;
-  development_status: string;
-  hardware_wallet: boolean;
-  proof_type: string;
-  org_structure: string;
-  hash_algorithm: string;
-  first_data_at: string;
-  last_data_at: string;
-}
-
-interface PriceData {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  total_supply: number;
-  max_supply: number;
-  beta_value: number;
-  first_data_at: string;
-  last_updated: string;
-  quotes: object;
-}
 
 const Coin = () => {
   const params = useParams();
   const navigate = useNavigate();
   const coinId = params.coinId ?? "";
-  const [tabName, setTabName] = useState<string>()
-  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>({ queryKey: ["info", coinId], queryFn: () => getInfoData(coinId)})
-  const { isLoading: tickerLoading, data: tickersData } = useQuery<PriceData>({ queryKey: ["tickers", coinId], queryFn: () => getPriceData(coinId)})
+  const [tabName, setTabName] = useState<string>();
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>({
+    queryKey: ["info", coinId],
+    queryFn: () => getInfoData(coinId),
+  });
+  const { isLoading: tickerLoading, data: tickersData } = useQuery<PriceData>({
+    queryKey: ["tickers", coinId],
+    queryFn: () => getPriceData(coinId),
+  });
   const loading = infoLoading || tickerLoading;
 
   const onClickTabMenu = (tabName: string) => {
     setTabName(tabName);
     navigate(tabName);
-  }
+  };
 
-  return <Container>
-    <Header>
-      <Title>{infoData?.name}</Title>
-    </Header>
-    {loading ? (
-      <Loader>Loading...</Loader>
-    ) : (
-      <>
-        <Overview>
-          <OverviewItem>
-            <Text>Rank</Text>
-            <Text>{infoData?.rank}</Text>
-          </OverviewItem>
-          <OverviewItem>
-            <Text>SYMBOL</Text>
-            <Text>$ {infoData?.symbol}</Text>
-          </OverviewItem>
-          <OverviewItem>
-            <Text>OPEN SOURCE</Text>
-            <Text>{infoData?.open_source ? "YES" : "NO"}</Text>
-          </OverviewItem>
-        </Overview>
-        <Description>{infoData?.description}</Description>
-        <Overview style={{ padding: "5px 60px"}}>
-          <OverviewItem>
-            <Text>TOTAL SUPPLY</Text>
-            <Text>{tickersData?.total_supply}</Text>
-          </OverviewItem>
-          <OverviewItem>
-            <Text>MAX SUPPLY</Text>
-            <Text>{tickersData?.max_supply}</Text>
-          </OverviewItem>
-        </Overview>
-        <Tab>
-          <TabItem 
-            onClick={() => onClickTabMenu("chart")}
-            $isActive={tabName === "chart"}
-          >Chart</TabItem>
-          <TabItem 
-            onClick={() => onClickTabMenu("price")}
-            $isActive={tabName === "price"}
-          >Price</TabItem>
-        </Tab>
-        <Outlet />
-      </>
-    )}
-    
-  </Container>
-}
+  return (
+    <Container>
+      <Header>
+        <Title>{infoData?.name}</Title>
+      </Header>
+      {loading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <>
+          <Overview>
+            <OverviewItem>
+              <Text>Rank</Text>
+              <Text>{infoData?.rank}</Text>
+            </OverviewItem>
+            <OverviewItem>
+              <Text>SYMBOL</Text>
+              <Text>$ {infoData?.symbol}</Text>
+            </OverviewItem>
+            <OverviewItem>
+              <Text>OPEN SOURCE</Text>
+              <Text>{infoData?.open_source ? "YES" : "NO"}</Text>
+            </OverviewItem>
+          </Overview>
+          <Description>{infoData?.description}</Description>
+          <Overview style={{ padding: "5px 60px" }}>
+            <OverviewItem>
+              <Text>TOTAL SUPPLY</Text>
+              <Text>{tickersData?.total_supply}</Text>
+            </OverviewItem>
+            <OverviewItem>
+              <Text>MAX SUPPLY</Text>
+              <Text>{tickersData?.max_supply}</Text>
+            </OverviewItem>
+          </Overview>
+          <Tab>
+            <TabItem
+              onClick={() => {
+                onClickTabMenu("chart");
+              }}
+              $isActive={tabName === "chart"}
+            >
+              Chart
+            </TabItem>
+            <TabItem
+              onClick={() => {
+                onClickTabMenu("price");
+              }}
+              $isActive={tabName === "price"}
+            >
+              Price
+            </TabItem>
+          </Tab>
+          <Outlet />
+        </>
+      )}
+    </Container>
+  );
+};
 
 export default Coin;
