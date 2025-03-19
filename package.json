@@ -34,12 +34,6 @@
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.69.0",
     "@types/react-router-dom": "^5.3.3"
   },
   "homepage": "http://dlawjdghks11.github.io/crypto-currency-app"
