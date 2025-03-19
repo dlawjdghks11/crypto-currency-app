@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCoins } from "../api";
+import { getAllCoins } from "../api";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { CoinInterface } from "../types/api";
@@ -43,7 +43,7 @@ const Coin = styled.li`
 const Coins = () => {
   const { isLoading, data } = useQuery<CoinInterface[]>({
     queryKey: ["allCoins"],
-    queryFn: getCoins,
+    queryFn: getAllCoins,
   });
   const navigate = useNavigate();
 

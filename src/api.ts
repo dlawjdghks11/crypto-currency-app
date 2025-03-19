@@ -1,7 +1,7 @@
 import axios from "axios";
 import { InfoData, PriceData, CoinInterface } from "./types/api";
 
-export const getCoins = async () => {
+export const getAllCoins = async () => {
   const res = await axios.get<CoinInterface[]>(
     "https://api.coinpaprika.com/v1/tickers",
   );

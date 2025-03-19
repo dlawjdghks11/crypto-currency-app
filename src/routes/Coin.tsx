@@ -77,11 +77,11 @@ const Coin = () => {
     queryKey: ["info", coinId],
     queryFn: () => getInfoData(coinId),
   });
-  const { isLoading: tickerLoading, data: tickersData } = useQuery<PriceData>({
-    queryKey: ["tickers", coinId],
+  const { isLoading: priceLoading, data: priceData } = useQuery<PriceData>({
+    queryKey: ["price", coinId],
     queryFn: () => getPriceData(coinId),
   });
-  const loading = infoLoading || tickerLoading;
+  const loading = infoLoading || priceLoading;
 
   const onClickTabMenu = (tabName: string) => {
     setTabName(tabName);
@@ -115,11 +115,11 @@ const Coin = () => {
           <Overview style={{ padding: "5px 60px" }}>
             <OverviewItem>
               <Text>TOTAL SUPPLY</Text>
-              <Text>{tickersData?.total_supply}</Text>
+              <Text>{priceData?.total_supply}</Text>
             </OverviewItem>
             <OverviewItem>
               <Text>MAX SUPPLY</Text>
-              <Text>{tickersData?.max_supply}</Text>
+              <Text>{priceData?.max_supply}</Text>
             </OverviewItem>
           </Overview>
           <Tab>
