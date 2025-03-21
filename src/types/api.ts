@@ -37,3 +37,14 @@ export interface PriceData {
   last_updated: string;
   quotes: object;
 }
+
+export interface HistoryData {
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
+  market_cap: number;
+}

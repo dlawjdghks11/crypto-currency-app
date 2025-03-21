@@ -35,7 +35,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
-    background-color: ${(props) => props.theme.background}
+    background-color: ${(props) => props.theme.background};
+    overflow-y: scroll;
   }
   menu, ol, ul {
     list-style: none;
