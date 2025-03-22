@@ -3,6 +3,7 @@ import { HistoryData } from "../types/api";
 import { getHistoryData } from "../api";
 import { useOutletContext } from "react-router-dom";
 import { default as CandleStickChart } from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
 interface ChartProps {
   coinId: string;
@@ -13,14 +14,21 @@ const Chart = () => {
   const { isLoading, data } = useQuery<HistoryData[]>({
     queryKey: ["ohlcv", coinId],
     queryFn: () => getHistoryData(coinId),
+    refetchInterval: 10000,
   });
-  const options = {
+  const options: ApexOptions = {
     chart: {
       id: "candlestick",
     },
+    theme: {
+      mode: "dark",
+    },
     xaxis: {
+      type: "datetime",
+    },
+    yaxis: {
       labels: {
-        show: false,
+        formatter: (val: number) => `$ ${val.toFixed(2)}`,
       },
     },
   };

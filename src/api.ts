@@ -26,5 +26,5 @@ export const getHistoryData = async (coinId: string) => {
     `https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`,
   );
 
-  return res.data.slice(-14);
+  return res.data;
 };
