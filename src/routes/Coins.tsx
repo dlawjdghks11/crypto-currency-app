@@ -3,6 +3,7 @@ import { getAllCoins } from "../api";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { CoinInterface } from "../types/api";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -49,6 +50,13 @@ const Coins = () => {
 
   return (
     <Container>
+      <HelmetProvider>
+        <div>
+          <Helmet>
+            <title>COINS</title>
+          </Helmet>
+        </div>
+      </HelmetProvider>
       <Header>
         <Title>COINS</Title>
       </Header>

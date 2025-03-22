@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { getInfoData, getPriceData } from "../api";
 import { InfoData, PriceData } from "../types/api";
 import { useState } from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -90,6 +91,13 @@ const Coin = () => {
 
   return (
     <Container>
+      <HelmetProvider>
+        <div>
+          <Helmet>
+            <title>{infoData?.name}</title>
+          </Helmet>
+        </div>
+      </HelmetProvider>
       <Header>
         <Title>{infoData?.name}</Title>
       </Header>
