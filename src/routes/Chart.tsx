@@ -4,6 +4,8 @@ import { getHistoryData } from "../api";
 import { useOutletContext } from "react-router-dom";
 import { default as CandleStickChart } from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atom";
 
 interface ChartProps {
   coinId: string;
@@ -15,12 +17,13 @@ const Chart = () => {
     queryKey: ["ohlcv", coinId],
     queryFn: () => getHistoryData(coinId),
   });
+  const isDark = useRecoilValue(isDarkAtom);
   const options: ApexOptions = {
     chart: {
       id: "candlestick",
     },
     theme: {
-      mode: "dark",
+      mode: isDark ? "dark" : "light",
     },
     xaxis: {
       type: "datetime",

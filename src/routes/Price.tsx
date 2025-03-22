@@ -5,7 +5,7 @@ import styled from "styled-components";
 const PriceContainer = styled.div`
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${(props) => props.theme.border};
 `;
 
 const Grid = styled.div`

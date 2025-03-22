@@ -24,7 +24,7 @@ const Title = styled.h1`
 `;
 
 const Overview = styled.div`
-  background-color: black;
+  background-color: ${(props) => props.theme.subBackground};
   display: flex;
   justify-content: space-between;
   padding: 5px 20px;
@@ -52,12 +52,12 @@ const Loader = styled.div`
 
 const Tab = styled.div`
   display: flex;
-  background-color: black;
+  background-color: ${(props) => props.theme.subBackground};
   justify-content: space-between;
   padding: 5px 100px;
   border-radius: 10px;
   margin-top: 20px;
-  border: 1px solid;
+  margin-bottom: 10px;
 `;
 
 const TabItem = styled.div<{
