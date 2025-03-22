@@ -80,7 +80,6 @@ const Coin = () => {
   const { isLoading: priceLoading, data: priceData } = useQuery<PriceData>({
     queryKey: ["price", coinId],
     queryFn: () => getPriceData(coinId),
-    refetchInterval: 5000,
   });
   const loading = infoLoading || priceLoading;
 
@@ -141,7 +140,7 @@ const Coin = () => {
               Price
             </TabItem>
           </Tab>
-          <Outlet context={{ coinId }} />
+          <Outlet context={{ coinId, priceData }} />
         </>
       )}
     </Container>

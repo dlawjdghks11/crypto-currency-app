@@ -14,7 +14,6 @@ const Chart = () => {
   const { isLoading, data } = useQuery<HistoryData[]>({
     queryKey: ["ohlcv", coinId],
     queryFn: () => getHistoryData(coinId),
-    refetchInterval: 10000,
   });
   const options: ApexOptions = {
     chart: {
