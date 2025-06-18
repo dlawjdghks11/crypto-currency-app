@@ -1,7 +1,8 @@
 import axios from "axios";
 import { InfoData, PriceData, CoinInterface, HistoryData } from "./types/api";
 
-const BASE_URL = "https://api.coinpaprika.com/v1";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const SUB_URL = process.env.REACT_APP_SUB_URL;
 
 export const getAllCoins = async () => {
   const res = await axios.get<CoinInterface[]>(`${BASE_URL}/tickers`);
@@ -22,9 +23,7 @@ export const getPriceData = async (coinId: string) => {
 };
 
 export const getHistoryData = async (coinId: string) => {
-  const res = await axios.get<HistoryData[]>(
-    `https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`,
-  );
+  const res = await axios.get<HistoryData[]>(`${SUB_URL}?coinId=${coinId}`);
 
   return res.data;
 };
