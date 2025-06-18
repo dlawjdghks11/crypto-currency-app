@@ -12,7 +12,6 @@ export const Router = () => {
         v7_startTransition: true,
         v7_relativeSplatPath: true,
       }}
-      basename="/crypto-currency-app"
     >
       <Header />
       <Routes>
